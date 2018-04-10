@@ -1,0 +1,54 @@
+<!--
+  Generated template for the SearchPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Pronto!</ion-title>
+  </ion-navbar>
+
+</ion-header>
+<ion-content padding>
+    <form [formGroup]="form" (ngSubmit)="search()">
+        <ion-list>
+            <ion-item>
+              <ion-label>Category</ion-label>
+              <ion-label>{{category.catDescription}}</ion-label>
+            </ion-item>
+            <ion-item>
+                <ion-label>What </ion-label>
+                <ion-select [(ngModel)]="searchcriteria.serviceType"  formControlName="serviceType" >
+                  <!--ion-option value="Electrictions">Electricians</ion-option>
+                  <ion-option value="Plumbing">Plubming</ion-option>
+                  <ion-option value="locksmith">Locksmith</ion-option-->
+                  <ion-option *ngFor="let srv of category.services" [value]="srv.serviceId">{{srv.serviceDescription}}</ion-option>
+                </ion-select>
+            </ion-item>
+            <ion-item>
+                <ion-label>When</ion-label>
+                <ion-datetime displayFormat="D MMM YY DDD" pickerFormat="D MMM YY" 
+                [(ngModel)]="searchcriteria.appointmentDate"  formControlName="appointmentDate">
+              </ion-datetime>
+            </ion-item>
+            <ion-item>
+              <ion-label>From</ion-label>
+              <ion-datetime displayFormat="HH:mm" pickerFormat="HH:mm" 
+              [(ngModel)]="searchcriteria.bookingTimeFr"  formControlName="bookingTimeFr">
+            </ion-datetime>
+          </ion-item>
+          <ion-item>
+            <ion-label>To</ion-label>
+            <ion-datetime displayFormat="HH:mm" pickerFormat="HH:mm" 
+            [(ngModel)]="searchcriteria.bookingTimeTo"  formControlName="bookingTimeTo">
+          </ion-datetime>
+        </ion-item>
+            <ion-item>
+                <button ion-button color="dark" (click)="search()" full [disabled]="!form.valid">Get Someone!</button>
+            </ion-item>
+      </ion-list>
+    </form>
+ 
+</ion-content>
